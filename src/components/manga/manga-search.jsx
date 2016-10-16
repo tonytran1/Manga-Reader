@@ -5,20 +5,22 @@ import query from 'json-query';
 import MangaSelect from './manga-select'
 
 export default class MangaSearch extends React.Component {
-  constructor() {
-    super();
-    this.parse("naRuto shippuden");
+  constructor(props) {
+    super(props);
     this.state = {
-      download: false,
-      loading: true,
+      search: "",
       results: {
         manga: []
       }
     }
+
+  }
+  componentWillReceiveProps(props) {
+    this.parse(props.search);
   }
 
   parse(searchQuery) {
-    let string = "";
+    console.log("Parsing");
     searchQuery = searchQuery.toLowerCase();
     $.getJSON("http://www.mangaeden.com/api/list/0/", JSON => {
       this.setState({ download: "http://www.mangaeden.com/api/list/0/",
@@ -31,10 +33,7 @@ export default class MangaSearch extends React.Component {
           }
         }
       });
-      for (let i = 0; i < 10; i++)
-        string += (JSON.manga[i].t + " ");
     })
-    return string;
   }
 
   search(input, searchQuery) {
@@ -50,8 +49,7 @@ export default class MangaSearch extends React.Component {
     });
     input.map(function(manga) {
       let baseURL = "https://cdn.mangaeden.com/mangasimg/"
-      //manga.t.match(reg)
-      if (manga.h != 0 && regExpressions.some(rx => rx.test(manga.t.toLowerCase()))) {
+      if (manga.h !== 0 && regExpressions.some(rx => rx.test(manga.t.toLowerCase()))) {
         results.manga[index] = {
           title: manga.t,
           id: manga.i,
@@ -61,9 +59,7 @@ export default class MangaSearch extends React.Component {
         index++;
       }
     })
-    //console.log(results);
     this.setState({results: results});
-    //console.log(this.state.results);
   }
 
   createSelection(manga, index) {
@@ -76,7 +72,6 @@ export default class MangaSearch extends React.Component {
         <ul className={ styles.listGroup }>
           { this.state.results.manga.map(this.createSelection) }
         </ul>
-        <a href={ this.state.download }>{ this.state.loading }</a>
       </div>
     );
   }

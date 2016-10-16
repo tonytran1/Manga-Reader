@@ -1,6 +1,6 @@
 import React from 'react';
-import classNames from 'classnames'
 import styles from './manga.scss'
+import classNames from 'classnames'
 import $ from 'jquery';
 
 export default class MangaChapters extends React.Component {
@@ -12,9 +12,13 @@ export default class MangaChapters extends React.Component {
   }
 
   onSelect(id) {
-    $.getJSON("http://www.mangaeden.com/api/chapter/" + id, JSON => {
-      this.setState({ images: JSON.images.map(this.createImage) });
-    })
+    if (this.state.images) {
+      this.setState({images: ""});
+    } else {
+      $.getJSON("http://www.mangaeden.com/api/chapter/" + id, JSON => {
+        this.setState({ images: JSON.images.map(this.createImage) });
+      })
+    }
   }
 
   createImage(image, index) {

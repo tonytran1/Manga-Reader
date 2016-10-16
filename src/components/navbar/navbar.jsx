@@ -1,5 +1,5 @@
 import React from 'react';
-
+import $ from 'jquery';
 export default class Navbar extends React.Component {
   constructor() {
     super();
@@ -15,7 +15,7 @@ export default class Navbar extends React.Component {
               <div className="input-group">
                 <input id="search-value" type="text" placeholder="Search" className="form-control" />
                 <div className="input-group-btn">
-                  <button className="btn btn-md btn-block btn-secondary"><span className="glyphicon glyphicon-search"></span></button>
+                  <a id="search-btn" className="btn btn-md btn-block btn-secondary"><span className="glyphicon glyphicon-search"></span></a>
                 </div>
               </div>
             </form>

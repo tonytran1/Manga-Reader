@@ -1,7 +1,18 @@
 .listGroup {
+  padding: 0;
   list-style-type: none;
+  text-align: center;
 }
 
 .selectionLink {
   cursor: pointer;
+}
+
+.selectionLink:hover {
+  background: #66d9ff;
+}
+
+.center {
+  text-align: center;
+  position: 0px;
 }

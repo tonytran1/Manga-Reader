@@ -51,7 +51,7 @@ export default class MangaSearch extends React.Component {
     input.map(function(manga) {
       let baseURL = "https://cdn.mangaeden.com/mangasimg/"
       //manga.t.match(reg)
-      if (regExpressions.some(rx => rx.test(manga.t.toLowerCase()))) {
+      if (manga.h != 0 && regExpressions.some(rx => rx.test(manga.t.toLowerCase()))) {
         results.manga[index] = {
           title: manga.t,
           id: manga.i,

@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import styles from './manga.scss'
 import query from 'json-query';
 import MangaSelect from './manga-select'
 
@@ -9,8 +10,10 @@ export default class MangaSearch extends React.Component {
     this.parse("naRuto shippuden");
     this.state = {
       download: false,
-      loading: "false",
-      results: "Loading"
+      loading: true,
+      results: {
+        manga: []
+      }
     }
   }
 
@@ -39,8 +42,7 @@ export default class MangaSearch extends React.Component {
     let regExpressions = [];
     let searchTerms = searchQuery.split(" ");
     let results = {
-      manga: {
-      }
+      manga: []
     };
     regExpressions.push(new RegExp(searchQuery + "\\s*\\w*", "g"))
     searchTerms.forEach(function(term) {
@@ -59,21 +61,21 @@ export default class MangaSearch extends React.Component {
         index++;
       }
     })
-  //  console.log(results);
+    //console.log(results);
     this.setState({results: results});
-    console.log(this.state.results);
+    //console.log(this.state.results);
   }
 
-  createSelection() {
-    return (
-      <MangaSelect title={ this.state.results[{index}].title } />
-      )
+  createSelection(manga, index) {
+    return ( <MangaSelect key={ index } title={ manga.title } id={ manga.id } /> )
   }
 
   render() {
     return (
       <div>
-        <div onChange={ this.createSelection }>{this.state.results}</div>
+        <ul className={ styles.listGroup }>
+          { this.state.results.manga.map(this.createSelection) }
+        </ul>
         <a href={ this.state.download }>{ this.state.loading }</a>
       </div>
     );

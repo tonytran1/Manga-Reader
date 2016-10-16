@@ -1,17 +1,23 @@
 import React from 'react';
-// import $ from 'jquery';
-// import query from 'json-query';
+import styles from './manga.scss'
+import $ from 'jquery';
 
 export default class MangaSelect extends React.Component {
   constructor() {
     super();
   }
-  getTitle() {
-    return this.props.title;
+
+  onSelect(id) {
+    $.getJSON("http://www.mangaeden.com/api/manga/" + id, JSON => {
+      console.log(JSON);
+    })
   }
+
   render() {
     return (
-      <a>{ this.getTitle }</a>
+      <li className={ styles.selectionLink } >
+        <a onClick={ this.onSelect.bind(this, this.props.id) }>{ this.props.title }</a>
+      </li>
     );
   }
 }

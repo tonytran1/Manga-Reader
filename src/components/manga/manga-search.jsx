@@ -25,7 +25,6 @@ export default class MangaSearch extends React.Component {
     this.setState({ loading: true });
     searchQuery = searchQuery.toLowerCase();
     $.getJSON("http://www.mangaeden.com/api/list/0/", JSON => {
-      this.setState({ download: "http://www.mangaeden.com/api/list/0/" });
       query(['manga[**]:select'], {
         data: JSON,
         locals: {
@@ -85,17 +84,17 @@ export default class MangaSearch extends React.Component {
 
   render() {
     let length = this.state.results.manga.length;
-    if (length >= 300) {
+    if (this.state.loading) {
+      return (
+        <img className={ classNames('img-responsive', styles.image) } src="assets/loading.gif" />
+      )
+    } else if (length >= 300) {
       return (
         <h4 className={ styles.center } >{ "Too many results. Try narrowing your search" }</h4>
       )
     } else if (length === 0) {
       return (
         <h4 className={ styles.center } >{ "No current results for search field." }</h4>
-      )
-    } else if (this.state.loading) {
-      return (
-        <img className={ classNames('img-responsive', styles.image) } src="assets/loading.gif" />
       )
     } else {
       return (

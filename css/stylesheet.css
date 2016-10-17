@@ -1,0 +1,12 @@
+.glyphicon-search {
+  width: 40px;
+}
+
+.navbar-menu {
+  display: inline-block !important;
+  width: 93%;
+  float: right;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 30px;
+}

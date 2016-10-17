@@ -24,14 +24,19 @@ export default class MangaChapters extends React.Component {
   createImage(image, index) {
     let baseURL = "https://cdn.mangaeden.com/mangasimg/"
     return (
-      <img className={ classNames('img-responsive', styles.image) } key={ index } src={ baseURL + image[1] } />
+      <div key={ index } >
+        <img className={ classNames('img-responsive', styles.image) } src={ baseURL + image[1] } />
+        <p>{ "Page " + (index + 1) }</p>
+        <hr />
+      </div>
     )
   }
 
   render() {
     return (
-      <li>
+      <li className={ styles.volume } >
         <a onClick={ this.onSelect.bind(this, this.props.id) } className={ styles.selectionLink }>{ 'Volume ' + this.props.volume }</a>
+        <br />
         { this.state.images }
       </li>
     );

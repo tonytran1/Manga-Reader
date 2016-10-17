@@ -1,0 +1,26 @@
+.navBar, .navBrand {
+  margin:0;
+  padding:0px;
+  background-color: #1a1a1a;
+}
+
+.navBrand {
+  width: auto;
+  display: inline;
+}
+
+.input {
+  height: auto;
+}
+
+@media screen and (max-width: 760px) {
+  .inline {
+    display: inline-block;
+  }
+
+}
+
+.inline {
+  float: left;
+  display: inline-block;
+}

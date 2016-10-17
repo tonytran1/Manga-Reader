@@ -26,7 +26,7 @@ export default class App extends React.Component {
     let value = $('#search-value')[0].value;
     if (!value || !value.length)
       return;
-    this.setState({ search: $('#search-value')[0].value });
+    this.setState({ search: value });
   }
 
   render() {

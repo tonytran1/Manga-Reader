@@ -45,7 +45,7 @@ module.exports = {
 	devtool: process.env.WEBPACK_DEVTOOL || 'cheap-module-source-map',
 	output: {
 		path: path.join(__dirname, 'public'),
-		filename: 'bundle.js'
+		filename: 'js/bundle.js'
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx']

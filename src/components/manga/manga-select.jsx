@@ -1,23 +1,31 @@
 import React from 'react';
 import Chapters from './manga-chapters'
 import styles from './manga.scss'
+import classNames from 'classnames'
 import $ from 'jquery';
 
 export default class MangaSelect extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      view: ""
+      view: "",
+      image: "",
+      loading: false
     }
   }
 
   onSelect(id) {
-    if (this.state.chapters) {
-      this.setState({chapters: ""});
+    if (this.state.loading) {
+      return;
+    } else if (this.state.chapters) {
+      this.setState({ chapters: "", image: "" });
     } else {
+      this.setState({ loading: true });
       $.getJSON("http://www.mangaeden.com/api/manga/" + id, JSON => {
-        console.log(JSON);
-        this.setState({ chapters: JSON.chapters.map(this.createLink) });
+        this.setState({ chapters: JSON.chapters.map(this.createLink),
+                        loading: false });
+        let y = $(window).scrollTop();
+        $(window).scrollTop(y + 200);
       });
     }
   }
@@ -27,15 +35,32 @@ export default class MangaSelect extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <li className='list-group-item' >
-          <a className={ styles.selectionLink } onClick={ this.onSelect.bind(this, this.props.id) }><b>{ this.props.title }</b></a>
-        </li>
-        <ul className={ styles.listGroup }>
-          { this.state.chapters }
-        </ul>
-      </div>
-    );
+    if (this.state.loading) {
+      return (
+        <div className={ styles.listGroup }>
+          <li onClick={ this.onSelect.bind(this, this.props.id) } className={ classNames(styles.selectionLink,'list-group-item') } >
+            <h5><b>{ this.props.title }</b></h5> <br />
+            { this.props.image }
+            <span className='glyphicon glyphicon-chevron-down'></span>
+          </li>
+          <ul className={ styles.listGroup }>
+            <img className={ classNames('img-responsive', styles.image) } src="assets/loading.gif" />
+          </ul>
+        </div>
+      )
+    } else {
+      return (
+        <div className={ styles.listGroup }>
+          <li onClick={ this.onSelect.bind(this, this.props.id) } className={ classNames(styles.selectionLink,'list-group-item img-rounded') } >
+            <h5><b>{ this.props.title }</b></h5> <br />
+            { this.props.image }
+            <span className='glyphicon glyphicon-chevron-down'></span>
+          </li>
+          <ul className={ styles.listGroup }>
+            { this.state.chapters }
+          </ul>
+        </div>
+      )
+    }
   }
 }

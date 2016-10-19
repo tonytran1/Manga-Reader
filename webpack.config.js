@@ -38,7 +38,7 @@ loaders.push({
 
 module.exports = {
 	entry: [
-		`webpack-dev-server/client?http://${HOST}:${PORT}`,
+		//`webpack-dev-server/client?http://${HOST}:${PORT}`,
 		`webpack/hot/only-dev-server`,
 		`./src/index.jsx` // Your appʼs entry point
 	],

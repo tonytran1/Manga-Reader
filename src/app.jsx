@@ -11,6 +11,8 @@ export default class App extends React.Component {
     this.state = {
       search: "false"
     }
+    if (document.location.protocol === ("https:"))
+      document.location = "http://manga-readers.herokuapp.com/"
     $(document).on('click', '#search-btn', () => {
       this.search();
     });

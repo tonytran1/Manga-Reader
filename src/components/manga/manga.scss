@@ -1,49 +1,87 @@
 .listGroup {
   padding: 0;
-  margin-bottom: 10px;
-  margin-right: 10px;
+  margin-bottom: 15px;
+  margin-right: 15px;
   width: 100%;
   list-style-type: none;
   text-align: center;
 }
+
 .selectionLink {
   -webkit-box-shadow: 1px 1px 2px 2px #8c8c8c;
   -moz-box-shadow:    1px 1px 2px 2px #8c8c8c;
   box-shadow:         1px 1px 2px 2px #8c8c8c;
   display: inline-block;
   cursor: pointer;
-  color: black;
-  width: calc(50% - 10px);
+  color: white;
+  background-color: #1a1a1a;
+  border: #1a1a1a solid 1px;
+  padding: 0;
+  width: calc(60% - 10px);
 }
 @media screen and (max-width: 760px) {
   .selectionLink {
     display: inline-block;
     cursor: pointer;
-    color: black;
+    color: white;
+    background-color: #1a1a1a;
+    border: #1a1a1a solid 1px;
+    padding: 0;
     width: calc(80% - 10px);
   }
-}
-.volume {
-  font-size: 20px;
-  margin-top: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  .close, .volume {
+    font-size: 20px;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+  }
 }
 .selectionLink > a {
   display:inline;
 }
 .selectionLink:hover {
-  background: #66d9ff;
+  background-color: white;
+  color: black;
+}
+.close, .volume, .li {
+  font-size: 20px;
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+}
+.close:hover, .volume:hover {
+  font-size: 20px;
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: black !important;
+}
+.li:hover {
+  color: white;
 }
 .center {
   text-align: center;
   margin: auto;
 }
-.manga-title {
-
+.title {
+  border: black solid 1px;
+  margin: 0;
+  background-color: black !important;
+  color: white !important;
+}
+.page {
+  color:black;
 }
 .image {
   display: block;
   text-align: center;
   margin: auto;
+}
+.thumbnail {
+  display: block;
+  text-align: center;
+  margin: auto;
+  border: black solid 1px;
 }

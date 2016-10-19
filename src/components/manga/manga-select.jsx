@@ -25,7 +25,7 @@ export default class MangaSelect extends React.Component {
         this.setState({ chapters: JSON.chapters.map(this.createLink),
                         loading: false });
         let y = $(window).scrollTop();
-        $(window).scrollTop(y + 200);
+        $("html, body").animate({ scrollTop: y + 200 }, 350);
       });
     }
   }
@@ -38,8 +38,11 @@ export default class MangaSelect extends React.Component {
     if (this.state.loading) {
       return (
         <div className={ styles.listGroup }>
-          <li onClick={ this.onSelect.bind(this, this.props.id) } className={ classNames(styles.selectionLink,'list-group-item') } >
-            <h5><b>{ this.props.title }</b></h5> <br />
+          <li onClick={ this.onSelect.bind(this, this.props.id) } className={ classNames(styles.selectionLink, 'list-group-item') } >
+            <div className={ styles.title }>
+              <h5><b>{ this.props.title }</b></h5>
+            </div>
+            <br/>
             { this.props.image }
             <span className='glyphicon glyphicon-chevron-down'></span>
           </li>
@@ -51,8 +54,11 @@ export default class MangaSelect extends React.Component {
     } else {
       return (
         <div className={ styles.listGroup }>
-          <li onClick={ this.onSelect.bind(this, this.props.id) } className={ classNames(styles.selectionLink,'list-group-item img-rounded') } >
-            <h5><b>{ this.props.title }</b></h5> <br />
+          <li onClick={ this.onSelect.bind(this, this.props.id) } className={ classNames(styles.selectionLink, 'list-group-item img-rounded') } >
+            <div className={ styles.title }>
+              <h5><b>{ this.props.title }</b></h5>
+            </div>
+            <br/>
             { this.props.image }
             <span className='glyphicon glyphicon-chevron-down'></span>
           </li>

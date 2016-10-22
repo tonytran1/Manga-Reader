@@ -22,7 +22,10 @@ export default class MangaSelect extends React.Component {
     } else {
       this.setState({ loading: true });
       $.getJSON("http://www.mangaeden.com/api/manga/" + id, JSON => {
-        this.setState({ chapters: JSON.chapters.map(this.createLink),
+        let chapters = [];
+        chapters.push((<li key='-1' className={ styles.genre }>{ this.props.genre.join(",  ")}</li>));
+        chapters.push(JSON.chapters.map(this.createLink));
+        this.setState({ chapters: chapters,
                         loading: false });
         let y = $(window).scrollTop();
         $("html, body").animate({ scrollTop: y + 200 }, 350);

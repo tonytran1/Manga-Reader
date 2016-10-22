@@ -19,6 +19,24 @@
   padding: 0;
   width: calc(60% - 10px);
 }
+
+.genre {
+  -webkit-box-shadow: 1px 1px 2px 2px #8c8c8c;
+  -moz-box-shadow:    1px 1px 2px 2px #8c8c8c;
+  box-shadow:         1px 1px 2px 2px #8c8c8c;
+  display: inline-block;
+  font-size: 20px;
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #1a1a1a;
+  width: auto;
+  border: #1a1a1a solid 1px;
+  color: white;
+}
+
 @media screen and (max-width: 760px) {
   .selectionLink {
     display: inline-block;
@@ -29,34 +47,48 @@
     padding: 0;
     width: calc(80% - 10px);
   }
-  .close, .volume {
+   .volume {
     font-size: 20px;
     margin-top: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
-    color: white;
+    color: white !important;
+  }
+  .close {
+    font-size: 20px;
+    margin-top: 10px;
+    color: white !important;
   }
 }
 .selectionLink > a {
   display:inline;
 }
 .selectionLink:hover {
-  background-color: white;
-  color: black;
+  background-color: #2B2C30;
+
 }
-.close, .volume, .li {
+.volume, .li {
   font-size: 20px;
   margin-top: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
-  color: white;
+  color: white !important;
 }
-.close:hover, .volume:hover {
+
+.close {
+  font-size: 20px;
+  margin-top: 10px;
+  color: white !important;
+}
+.volume:hover {
   font-size: 20px;
   margin-top: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
-  color: black !important;
+}
+.close:hover {
+  font-size: 20px;
+  margin-top: 10px;
 }
 .li:hover {
   color: white;
@@ -71,9 +103,6 @@
   background-color: black !important;
   color: white !important;
 }
-.page {
-  color:black;
-}
 .image {
   display: block;
   text-align: center;
@@ -84,4 +113,7 @@
   text-align: center;
   margin: auto;
   border: black solid 1px;
+}
+.small {
+  font-size: 12px;
 }

@@ -1,15 +1,14 @@
 import React from 'react';
-import classNames from 'classnames'
+import classNames from 'classnames';
 import styles from './navbar.scss';
 
 export default class Navbar extends React.Component {
   constructor() {
     super();
   }
-
   render() {
     return (
-      <nav className={ classNames("navbar navbar-inverse navbar-fixed-top", styles.navBar) }>
+      <nav className={ classNames("navbar navbar-inverse navbar-fixed-top navbar-static-top", styles.navBar) }>
         <div className="container">
           <div className="navbar-header">
             <a><img className={ classNames('navbar-brand', styles.navBrand, styles.inline) } src="assets/logo.png" /></a>

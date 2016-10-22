@@ -53,6 +53,7 @@ export default class MangaSearch extends React.Component {
           title: manga.t,
           id: manga.i,
           hits: manga.h,
+          genre: manga.c,
           thumbnail: baseURL + manga.im
         }
         index++;
@@ -74,7 +75,9 @@ export default class MangaSearch extends React.Component {
 
   createSelection(manga, index) {
     let image = ( <img className={ classNames('img-responsive', styles.thumbnail) } src={ manga.thumbnail } /> );
-    return ( <MangaSelect key={ index } title={ manga.title } id={ manga.id } image={ image } /> )
+    return (
+      <MangaSelect key={ index } title={ manga.title } id={ manga.id } image={ image } genre={ manga.genre } />
+    )
   }
 
   render() {

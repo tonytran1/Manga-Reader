@@ -28,21 +28,17 @@ export default class MangaSelect extends React.Component {
   }
 
   changeOrder(id) {
-    if (this.state.order.includes('Latest')) {
-      this.setState({ order: 'Ordered by Oldest' });
-    } else {
-      this.setState({ order: 'Ordered by Latest' });
-    }
-    this.setState({ loading: true });
-    this.createVolumes(id, this.state.order);
+    let order = this.state.order.includes('Latest') ? 'Ordered by Oldest' : 'Ordered by Latest';
+    this.setState({ loading: true, order: order });
+    this.createVolumes(id, order);
   }
 
   createVolumes(id, order) {
     $.getJSON("http://www.mangaeden.com/api/manga/" + id, JSON => {
       let chapters = [];
       // let volumes = JSON.chapters.slice(0, this.state.numberOfVolumes);
-      chapters.push((<li key='-2' className={ styles.genre }>{ this.props.genre.join(",  ") }</li>));
-      chapters.push((<br />));
+      chapters.push((<li key='-3' className={ styles.genre }>{ this.props.genre.join(",  ") }</li>));
+      chapters.push((<br key='-2' />));
       chapters.push((<li key='-1' onClick={ this.changeOrder.bind(this, id) } className={ styles.toggle }>{ order }</li>));
       if (order.includes('Oldest')) {
         chapters.push(JSON.chapters.reverse().map(this.createLink));

@@ -11,6 +11,7 @@ export default class MangaSelect extends React.Component {
       view: "",
       image: "",
       numberOfVolumes: 50,
+      order: 'Ordered by Latest',
       loading: false
     }
   }
@@ -22,21 +23,35 @@ export default class MangaSelect extends React.Component {
       this.setState({ chapters: "", image: "" });
     } else {
       this.setState({ loading: true });
-      this.createVolumes(id);
+      this.createVolumes(id, this.state.order);
     }
   }
 
-  createVolumes(id) {
+  changeOrder(id) {
+    if (this.state.order.includes('Latest')) {
+      this.setState({ order: 'Ordered by Oldest' });
+    } else {
+      this.setState({ order: 'Ordered by Latest' });
+    }
+    this.setState({ loading: true });
+    this.createVolumes(id, this.state.order);
+  }
+
+  createVolumes(id, order) {
     $.getJSON("http://www.mangaeden.com/api/manga/" + id, JSON => {
       let chapters = [];
       // let volumes = JSON.chapters.slice(0, this.state.numberOfVolumes);
-      chapters.push((<li key='-1' className={ styles.genre }>{ this.props.genre.join(",  ") }</li>));
-      chapters.push(JSON.chapters.map(this.createLink));
+      chapters.push((<li key='-2' className={ styles.genre }>{ this.props.genre.join(",  ") }</li>));
+      chapters.push((<br />));
+      chapters.push((<li key='-1' onClick={ this.changeOrder.bind(this, id) } className={ styles.toggle }>{ order }</li>));
+      if (order.includes('Oldest')) {
+        chapters.push(JSON.chapters.reverse().map(this.createLink));
+      } else {
+        chapters.push(JSON.chapters.map(this.createLink));
+      }
       // chapters.push(this.showMore());
       this.setState({ chapters: chapters,
                       loading: false });
-      let y = $(window).scrollTop();
-      $("html, body").animate({ scrollTop: y + 200 }, 350);
     });
   }
 

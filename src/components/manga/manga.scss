@@ -7,6 +7,20 @@
   text-align: center;
 }
 
+.suggestButton {
+  -webkit-box-shadow: 1px 1px 2px 2px #8c8c8c;
+  -moz-box-shadow:    1px 1px 2px 2px #8c8c8c;
+  box-shadow:         1px 1px 2px 2px #8c8c8c;
+  background-color: #1a1a1a;
+  font-size: 20px;
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  border: #1a1a1a solid 1px;
+  color: white;
+}
+
 .selectionLink {
   -webkit-box-shadow: 1px 1px 2px 2px #8c8c8c;
   -moz-box-shadow:    1px 1px 2px 2px #8c8c8c;
@@ -90,7 +104,7 @@
 .selectionLink > a {
   display:inline;
 }
-.selectionLink:hover, .toggle:hover {
+.selectionLink:hover, .toggle:hover, .suggestButton:hover {
   background-color: #2B2C30;
 
 }

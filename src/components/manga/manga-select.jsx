@@ -38,8 +38,10 @@ export default class MangaSelect extends React.Component {
       let chapters = [];
       // let volumes = JSON.chapters.slice(0, this.state.numberOfVolumes);
       chapters.push((<li key='-3' className={ styles.genre }>{ this.props.genre.join(",  ") }</li>));
-      chapters.push((<br key='-2' />));
-      chapters.push((<li key='-1' onClick={ this.changeOrder.bind(this, id) } className={ styles.toggle }>{ order }</li>));
+      if (JSON.chapters.length > 1) {
+        chapters.push((<br key='-2' />));
+        chapters.push((<li key='-1' onClick={ this.changeOrder.bind(this, id) } className={ styles.toggle }>{ order }</li>));
+      }
       if (order.includes('Oldest')) {
         chapters.push(JSON.chapters.reverse().map(this.createLink));
       } else {

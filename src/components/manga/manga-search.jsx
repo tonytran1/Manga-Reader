@@ -8,7 +8,7 @@ import MangaSelect from './manga-select'
 export default class MangaSearch extends React.Component {
   constructor(props) {
     super(props);
-    this.RESULTS_LIMIT = 150;
+    this.RESULTS_LIMIT = 100;
     this.state = {
       search: "",
       loading: false,
@@ -20,10 +20,10 @@ export default class MangaSearch extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    this.parse(props.search);
+    this.search(props.search);
   }
 
-  parse(searchQuery) {
+  search(searchQuery) {
     if (this.state.currentSearch && this.state.currentSearch === searchQuery)
       return;
     this.setState({ loading: true });
@@ -33,14 +33,14 @@ export default class MangaSearch extends React.Component {
         data: JSON,
         locals: {
           select: input => {
-            this.search(input, searchQuery);
+            this.parseSearch(input, searchQuery);
           }
         }
       });
     })
   }
 
-  search(input, searchQuery) {
+  parseSearch(input, searchQuery) {
     let index = 0;
     let rx = new RegExp(searchQuery.replace(/\s+/g, '').toLowerCase() + "(...)*", "g");
     let results = {
@@ -59,14 +59,20 @@ export default class MangaSearch extends React.Component {
         index++;
       }
     })
+
+    results = this.processResults(results);
+    this.setState({ results: results,
+                    currentSearch: searchQuery,
+                    loading: false });
+  }
+
+  processResults(results) {
     results.manga.sort((a, b) => {
       return b.hits - a.hits;
     });
     if (results.manga.length > this.RESULTS_LIMIT)
       results.manga.splice(this.RESULTS_LIMIT);
-    this.setState({ results: results,
-                    currentSearch: searchQuery,
-                    loading: false });
+    return results;
   }
 
   createSelection(manga, index) {
@@ -74,6 +80,12 @@ export default class MangaSearch extends React.Component {
     return (
       <MangaSelect key={ index } title={ manga.title } id={ manga.id } image={ image } genre={ manga.genre } />
     )
+  }
+
+  suggest() {
+    const choices = ['Naruto', 'Bleach', 'Fairy Tail', 'One Punch Man', 'Dragon Ball', 'Hajime no Ippo'];
+    let random = choices[Math.floor(Math.random() * choices.length)];
+    this.search(random);
   }
 
   render() {
@@ -91,7 +103,10 @@ export default class MangaSearch extends React.Component {
       )
     } else {
       return (
-        <h5 className={ styles.center } >{ "Search for your next Manga Story." }</h5>
+        <div>
+          <h5 className={ styles.center } >{ "Search for your next Manga Story." }</h5>
+          <div onClick={ this.suggest.bind(this) } className={ classNames(styles.suggestButton) } >{ "Suggest" }</div>
+        </div>
       )
     }
   }

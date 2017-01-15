@@ -6,12 +6,17 @@ export default class Navbar extends React.Component {
   constructor() {
     super();
   }
+
+  refresh() {
+    location.reload();
+  }
+
   render() {
     return (
       <nav className={ classNames("navbar navbar-inverse navbar-fixed-top navbar-static-top", styles.navBar) }>
         <div className="container">
           <div className="navbar-header">
-            <a><img className={ classNames('navbar-brand', styles.navBrand, styles.inline) } src="assets/logo.png" /></a>
+            <a onClick={ this.refresh }><img className={ classNames('navbar-brand', styles.navBrand, styles.inline) } src="assets/logo.png" /></a>
             <form className={ classNames("navbar-menu navbar-form navbar-right", styles.inline) }>
               <div className="input-group">
                 <input className={ classNames(styles.input, "form-control") } id="search-value" type="text" placeholder="Search"/>

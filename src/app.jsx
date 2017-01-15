@@ -35,7 +35,7 @@ export default class App extends React.Component {
     return (
       <div>
         <Navbar />
-        <MangaSearch search={ this.state.search } />
+        <MangaSearch id='zoom' search={ this.state.search } />
       </div>
     )
   }

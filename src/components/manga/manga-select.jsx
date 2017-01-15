@@ -10,6 +10,7 @@ export default class MangaSelect extends React.Component {
     this.state = {
       view: "",
       image: "",
+      numberOfVolumes: 50,
       loading: false
     }
   }
@@ -21,17 +22,27 @@ export default class MangaSelect extends React.Component {
       this.setState({ chapters: "", image: "" });
     } else {
       this.setState({ loading: true });
-      $.getJSON("http://www.mangaeden.com/api/manga/" + id, JSON => {
-        let chapters = [];
-        chapters.push((<li key='-1' className={ styles.genre }>{ this.props.genre.join(",  ")}</li>));
-        chapters.push(JSON.chapters.map(this.createLink));
-        this.setState({ chapters: chapters,
-                        loading: false });
-        let y = $(window).scrollTop();
-        $("html, body").animate({ scrollTop: y + 200 }, 350);
-      });
+      this.createVolumes(id);
     }
   }
+
+  createVolumes(id) {
+    $.getJSON("http://www.mangaeden.com/api/manga/" + id, JSON => {
+      let chapters = [];
+      // let volumes = JSON.chapters.slice(0, this.state.numberOfVolumes);
+      chapters.push((<li key='-1' className={ styles.genre }>{ this.props.genre.join(",  ") }</li>));
+      chapters.push(JSON.chapters.map(this.createLink));
+      // chapters.push(this.showMore());
+      this.setState({ chapters: chapters,
+                      loading: false });
+      let y = $(window).scrollTop();
+      $("html, body").animate({ scrollTop: y + 200 }, 350);
+    });
+  }
+
+  // showMore() {
+  //   return ( <button className={ styles.showMoreButton } onClick={ this.showMore }> Show More</button> );
+  // }
 
   createLink(item, index) {
     return ( <Chapters key={ index } volume={ item[0] } id={ item[3] } /> )

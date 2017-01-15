@@ -60,11 +60,7 @@ export default class MangaSearch extends React.Component {
       }
     })
     results.manga.sort((a, b) => {
-      if (a.hits < b.hits && a.ld < b.ld)
-        return 0;
-      if (a.hits > b.hits && a.ld < b.ld)
-        return 0;
-      return 1;
+      return b.hits - a.hits;
     });
     if (results.manga.length > this.RESULTS_LIMIT)
       results.manga.splice(this.RESULTS_LIMIT);
@@ -81,22 +77,21 @@ export default class MangaSearch extends React.Component {
   }
 
   render() {
-    let length = this.state.results.manga.length;
     if (this.state.loading) {
       return (
         <img className={ classNames('img-responsive', styles.image) } src="assets/loading.gif" />
       )
-    } else if (length === 0) {
-      return (
-        <h5 className={ styles.center } >{ "Search for your next Manga Story." }</h5>
-      )
-    } else {
+    } else if (this.state.results.manga.length) {
       return (
         <div>
           <ul className={ styles.listGroup }>
             { this.state.results.manga.map(this.createSelection) }
           </ul>
         </div>
+      )
+    } else {
+      return (
+        <h5 className={ styles.center } >{ "Search for your next Manga Story." }</h5>
       )
     }
   }

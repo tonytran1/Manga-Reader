@@ -16,7 +16,8 @@ export default class MangaChapters extends React.Component {
 
   onClose(id, page) {
     this.setState({ images: '' });
-    window.scrollTo(0, 0);
+    document.getElementById(id).scrollIntoView(true);
+    document.body.scrollTop -= 80;
     localStorage.setItem(id, "Page " + page);
   }
 
@@ -42,7 +43,6 @@ export default class MangaChapters extends React.Component {
 
   createImage(image, index) {
     let baseURL = "https://cdn.mangaeden.com/mangasimg/";
-    // if (this.divideCloseButtons(index, length))  {
     return (
       <div className='manga-images' key={ index } >
         <img className={ classNames('img-responsive', styles.image) } src={ baseURL + image[1] } />
@@ -52,29 +52,13 @@ export default class MangaChapters extends React.Component {
         <hr />
       </div>
     )
-    // } else {
-    //   return (
-    //     <div className='manga-images' key={ index } >
-    //       <img className={ classNames('img-responsive', styles.image) } src={ baseURL + image[1] } />
-    //       <p className={ styles.page } >{ "Page " + (index + 1) }</p>
-    //       <hr />
-    //     </div>
-    //   )
-    // }
   }
-
-  // divideCloseButtons(index, length) {
-  //   return index === (length - 1)
-  //       || index === Math.floor(length * 0.25)
-  //       || index === Math.floor(length * 0.50)
-  //       || index === Math.floor(length * 0.75)
-  // }
 
   render() {
     if (this.state.loading) {
       return (
         <li className={ styles.li }>
-          <a onClick={ this.onSelect.bind(this, this.props.id) } className={ classNames(styles.volume, styles.selectionLink) }>{ 'Volume ' + this.props.volume }</a>
+          <a id={ this.props.id } onClick={ this.onSelect.bind(this, this.props.id) } className={ classNames(styles.volume, styles.selectionLink) }>{ 'Volume ' + this.props.volume }</a>
           <br />
           <img className={ classNames('img-responsive', styles.image) } src="assets/loading.gif" />
         </li>
@@ -83,7 +67,7 @@ export default class MangaChapters extends React.Component {
     else if (localStorage.getItem(this.props.id)) {
       return (
         <li className={ styles.li }>>
-          <a onClick={ this.onSelect.bind(this, this.props.id) } className={ classNames(styles.volume, styles.selectionLink) }>
+          <a id={ this.props.id } onClick={ this.onSelect.bind(this, this.props.id) } className={ classNames(styles.volume, styles.selectionLink) }>
             <p>{ 'Volume ' + this.props.volume }</p>
             <p className={ styles.small }>{ localStorage.getItem(this.props.id) }</p>
           </a>
@@ -95,7 +79,7 @@ export default class MangaChapters extends React.Component {
     else {
       return (
         <li className={ styles.li }>>
-          <a onClick={ this.onSelect.bind(this, this.props.id) } className={ classNames(styles.volume, styles.selectionLink) }>
+          <a id={ this.props.id } onClick={ this.onSelect.bind(this, this.props.id) } className={ classNames(styles.volume, styles.selectionLink) }>
             <p>{ 'Volume ' + this.props.volume }</p>
           </a>
 
